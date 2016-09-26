@@ -13,5 +13,10 @@ namespace PersonWebApplication
         {
 
         }
+
+        protected void PersonaButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("PersonasTelefonosWebForm.aspx");
+        }
     }
 }

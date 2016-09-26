@@ -13,7 +13,7 @@ namespace BLL
         ConexionDB Conexion = new ConexionDB();
         public int PersonaId { get; set; }
         public string Nombres { get; set; }
-        public int Sexo { get; set; }
+        public bool Sexo { get; set; }
         public string TipoTelefono { get; set; }
         public string Telefono { get; set; }
         public List<PersonasTelefonos> Detalle { get; set; }
@@ -22,7 +22,7 @@ namespace BLL
         {
             this.PersonaId = 0;
             this.Nombres = "";
-            this.Sexo = 0;
+            this.Sexo = false;
             this.TipoTelefono = "";
             this.Telefono = "";
             this.Detalle = new List<PersonasTelefonos>();
@@ -109,7 +109,7 @@ namespace BLL
                 {
                     this.PersonaId = (int)dt.Rows[0]["PersonaId"];
                     this.Nombres = dt.Rows[0]["Nombres"].ToString();
-                    this.Sexo = (int)dt.Rows[0]["Sexo"];
+                    this.Sexo = (bool)dt.Rows[0]["Sexo"];
                     dtEventDetalle = Conexion.ObtenerDatos(String.Format("select * from PersonasTelefonos where PersonaId=" + IdBuscado));
                     dtEventDetalle.Clear();
                     foreach (DataRow row in dtEventDetalle.Rows)
