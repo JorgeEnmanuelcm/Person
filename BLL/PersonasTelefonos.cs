@@ -28,6 +28,7 @@ namespace BLL
         {
             this.TipoTelefono = tipotelefono;
             this.Telefono = telefono;
-        }
+          }
+
     }
 }

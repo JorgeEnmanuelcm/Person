@@ -5,8 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BLL;
-using System.ComponentModel;
-using System.Drawing;
+using System.Data;
 
 namespace PersonWebApplication
 {
@@ -21,7 +20,8 @@ namespace PersonWebApplication
             TelefonoTextBox.Text = string.Empty;
             TipoTelefonoTextBox.Text = string.Empty;
             SexoRadioButtonList.SelectedIndex = 0;
-            PersonasGridView.DataSource = null;
+            PersonasGridView.DataSource = string.Empty;
+            PersonasGridView.DataBind();
         }
 
         private bool ObtenerDatos()
@@ -46,9 +46,9 @@ namespace PersonWebApplication
             }
             if (PersonasGridView.Rows.Count > 0)
             {
-                foreach (GridView item in PersonasGridView.Rows)
+                foreach (GridViewRow item in PersonasGridView.Rows)
                 {
-                  //  Persona.AgregarTelefonos(item.R, item.Cells["Telefono"].Value.ToString());
+                    Persona.AgregarTelefonos(item.Cells[0].Text, item.Cells[1].Text);
                 }
             }
             else
@@ -60,7 +60,9 @@ namespace PersonWebApplication
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            DataTable dt = new DataTable();
+            dt.Columns.AddRange(new DataColumn[2] { new DataColumn("TipoTelefono"), new DataColumn("Telefono") });
+            ViewState["PersonaClass"] = dt;
         }
 
         protected void BuscarButton_Click1(object sender, EventArgs e)
@@ -70,15 +72,24 @@ namespace PersonWebApplication
 
         protected void AgregarButton_Click(object sender, EventArgs e)
         {
-            //PersonaClass per;
-            //if (Session["Persona"] == null) 
-            //    Session["Persona"] = new PersonaClass(); per = (PersonaClass)Session["Persona"]; per.AgregarTelefonos(TipoTelefonoTextBox.Text, TelefonoTextBox.Text);
-            //Session["Persona"] = per;
-            //PersonasGridView.DataSource = per.TipoTelefono;
-            //PersonasGridView.DataSource = per.Telefono;
-            //PersonasGridView.DataBind();
-            //TipoTelefonoTextBox.Text = "";
-            //TelefonoTextBox.Text = "";
+            try
+            {
+                DataTable dt = (DataTable)ViewState["PersonaClass"];
+                DataRow fila;
+                fila = dt.NewRow();
+                fila["TipoTelefono"] = TipoTelefonoTextBox.Text;
+                fila["Telefono"] = TelefonoTextBox.Text;
+                dt.Rows.Add(fila);
+                ViewState["PersonaClass"] = dt;
+                PersonasGridView.DataSource = (DataTable)ViewState["PersonaClass"];
+                PersonasGridView.DataBind();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
 
         protected void NuevoButton_Click(object sender, EventArgs e)
@@ -89,6 +100,18 @@ namespace PersonWebApplication
         protected void GuadarButton_Click(object sender, EventArgs e)
         {
            // ObtenerDatos();
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            //ObtenerDatos();
+            //Persona.Insertar();
+        }
+
+        protected void GButton_Click(object sender, EventArgs e)
+        {
+            ObtenerDatos();
+            Persona.Insertar();
         }
     }
 }

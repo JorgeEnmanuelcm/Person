@@ -61,13 +61,14 @@
                 <br/><br/>
 
                 <%--DataGriew--%>
-                     <asp:GridView ID="PersonasGridView" runat="server" AutoGenerateColumns="False">
+                    <div class="form-group">
+                     <asp:GridView class="table" ID="PersonasGridView" runat="server" AutoGenerateColumns="False">
                          <Columns>
-                             <asp:BoundField HeaderText="TipoTelefono" ReadOnly="True" />
-                             <asp:BoundField HeaderText="Telefono" ReadOnly="True" />
+                             <asp:BoundField DataField="TipoTelefono" HeaderText="Tipo telefono" ReadOnly="True" SortExpression="TipoTelefono" />
+                             <asp:BoundField DataField="Telefono" HeaderText="Telefono" ReadOnly="True" SortExpression="Telefono" />
                          </Columns>
                     </asp:GridView>
-            
+                    </div>
             <br/><br/>
 
              <%--Botones--%>
@@ -75,7 +76,7 @@
                  <div class="text-center">
                    <div class="form-group" style="display: inline-block">
                       <asp:Button Text="Nuevo" class ="btn btn-warning btn-sm" runat="server" ID="NuevoButton" OnClick="NuevoButton_Click"  />
-                      <%--<asp:Button Text="Guardar" class ="btn btn-success btn-sm" runat="server" ID="GuadarButton" OnClick="GuadarButton_Click"  />--%>
+                       <asp:Button Text="Guardar" class ="btn btn-info btn-sm" runat="server" ID="GButton" OnClick="GButton_Click"  />
                       <asp:Button Text="Eliminar" class ="btn btn-danger btn-sm" runat="server" ID="EliminarButton"  />
                    </div>
                    </div>

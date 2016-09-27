@@ -62,6 +62,11 @@ namespace BLL
             return Retorno > 0;
         }
 
+        public void AgregarTelefonos(object text1, object text2)
+        {
+            throw new NotImplementedException();
+        }
+
         public override bool Editar()
         {
             bool Retorno = false;

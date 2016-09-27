@@ -94,6 +94,15 @@ namespace PersonWebApplication {
         protected global::System.Web.UI.WebControls.Button NuevoButton;
         
         /// <summary>
+        /// GButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button GButton;
+        
+        /// <summary>
         /// EliminarButton control.
         /// </summary>
         /// <remarks>
