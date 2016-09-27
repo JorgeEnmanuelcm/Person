@@ -23,6 +23,7 @@ namespace PersonWebApplication
             PersonasGridView.DataSource = string.Empty;
             PersonasGridView.DataBind();
         }
+        
 
         private bool ObtenerDatos()
         {
@@ -110,8 +111,17 @@ namespace PersonWebApplication
 
         protected void GButton_Click(object sender, EventArgs e)
         {
+
             ObtenerDatos();
-            Persona.Insertar();
-        }
+            if(Persona.Insertar())
+            {
+                Limpiar();
+                Toastr.TClass.Toastr(this.Page, "se guardo con exito", "Info", "Success");
+            }
+            else
+            {
+                Toastr.TClass.Toastr(this.Page, "no se guardo", "Error", "Error");
+            }
+    }
     }
 }
