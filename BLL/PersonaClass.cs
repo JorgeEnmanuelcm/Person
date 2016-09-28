@@ -83,7 +83,7 @@ namespace BLL
             }
             return Retorno;
         }
-
+        
         public override bool Eliminar()
         {
             bool Retorno = false;
@@ -111,10 +111,10 @@ namespace BLL
                     this.Nombres = dt.Rows[0]["Nombres"].ToString();
                     this.Sexo = dt.Rows[0]["Sexo"].ToString(); ;
                     dtEventDetalle = Conexion.ObtenerDatos(String.Format("select * from PersonasTelefonos where PersonaId=" + IdBuscado));
-                    dtEventDetalle.Clear();
+                   
                     foreach (DataRow row in dtEventDetalle.Rows)
                     {
-                        AgregarTelefonos(row["TipoTelefono"].ToString(), row["TipoTelefono"].ToString());
+                        AgregarTelefonos(row["TipoTelefono"].ToString(), row["Telefono"].ToString());
                     }
                 }
             }

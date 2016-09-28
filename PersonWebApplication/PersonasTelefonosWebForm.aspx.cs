@@ -12,6 +12,7 @@ namespace PersonWebApplication
     public partial class PersonasTelefonosWebForm : System.Web.UI.Page
     {
         PersonaClass Persona = new PersonaClass();
+        DataTable dt = new DataTable();
 
         private void Limpiar()
         {
@@ -67,6 +68,24 @@ namespace PersonWebApplication
             return Retorno;
         }
 
+        public void DevolverDatos()
+        {
+            
+            Limpiar();
+            PersonaIdTextBox.Text = Persona.PersonaId.ToString();
+            NombresTextBox.Text = Persona.Nombres.ToString();
+            SexoTextBox.Text = Persona.Sexo.ToString();
+            foreach (var item in Persona.Detalle)
+            {
+                dt = (DataTable)ViewState["PersonaClass"];
+                dt.Rows.Add(item.TipoTelefono, item.Telefono);
+                ViewState["PersonaClass"] = dt;
+                PersonasGridView.DataSource = (DataTable)ViewState["PersonaClass"];
+                PersonasGridView.DataBind();
+            }
+        }
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
             DataTable dt = new DataTable();
@@ -76,7 +95,24 @@ namespace PersonWebApplication
 
         protected void BuscarButton_Click1(object sender, EventArgs e)
         {
-
+            int id;
+            int.TryParse(PersonaIdTextBox.Text, out id);
+            if(id<0)
+            {
+                Toastr.TClass.Toastr(this.Page, "Error", "Error", "Error");
+            }
+            else
+            {
+                if(Persona.Buscar(id))
+                {
+                    GButton.Text = "Modificar";
+                    DevolverDatos();
+                }
+                else
+                {
+                    Toastr.TClass.Toastr(this.Page, "Error", "Error", "Error");
+                }
+            }
         }
 
         protected void AgregarButton_Click(object sender, EventArgs e)
