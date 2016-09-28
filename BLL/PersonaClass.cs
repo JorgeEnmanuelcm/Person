@@ -13,7 +13,7 @@ namespace BLL
         ConexionDB Conexion = new ConexionDB();
         public int PersonaId { get; set; }
         public string Nombres { get; set; }
-        public bool Sexo { get; set; }
+        public string Sexo { get; set; }
         public string TipoTelefono { get; set; }
         public string Telefono { get; set; }
         public List<PersonasTelefonos> Detalle { get; set; }
@@ -22,7 +22,7 @@ namespace BLL
         {
             this.PersonaId = 0;
             this.Nombres = "";
-            this.Sexo = false;
+            this.Sexo = "";
             this.TipoTelefono = "";
             this.Telefono = "";
             this.Detalle = new List<PersonasTelefonos>();
@@ -44,7 +44,7 @@ namespace BLL
             object Identity;
             try
             {
-                Identity = Conexion.ObtenerValor(String.Format("Insert Into Personas(Nombres, sexo) values('{0}', {1}) select @@IDENTITY", this.Nombres, this.Sexo));
+                Identity = Conexion.ObtenerValor(String.Format("Insert Into Personas(Nombres, Sexo) values('{0}', '{1}') select @@IDENTITY", this.Nombres, this.Sexo));
                 int.TryParse(Identity.ToString(), out Retorno);
                 this.PersonaId = Retorno;
                 if (Retorno > 0)
@@ -62,17 +62,12 @@ namespace BLL
             return Retorno > 0;
         }
 
-        public void AgregarTelefonos(object text1, object text2)
-        {
-            throw new NotImplementedException();
-        }
-
         public override bool Editar()
         {
             bool Retorno = false;
             try
             {
-                Retorno = Conexion.Ejecutar(String.Format("Update Personas set Nombres='{0}', Sexo={1} where PersonaId= {2}", this.Nombres, this.Sexo, this.PersonaId));
+                Retorno = Conexion.Ejecutar(String.Format("Update Personas set Nombres='{0}', Sexo='{1}' where PersonaId= {2}", this.Nombres, this.Sexo, this.PersonaId));
                 if (Retorno)
                 {
                     Conexion.Ejecutar(String.Format("Delete from PersonasTelefonos Where PersonaId= {0}", this.PersonaId));
@@ -114,7 +109,7 @@ namespace BLL
                 {
                     this.PersonaId = (int)dt.Rows[0]["PersonaId"];
                     this.Nombres = dt.Rows[0]["Nombres"].ToString();
-                    this.Sexo = (bool)dt.Rows[0]["Sexo"];
+                    this.Sexo = dt.Rows[0]["Sexo"].ToString(); ;
                     dtEventDetalle = Conexion.ObtenerDatos(String.Format("select * from PersonasTelefonos where PersonaId=" + IdBuscado));
                     dtEventDetalle.Clear();
                     foreach (DataRow row in dtEventDetalle.Rows)

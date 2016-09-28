@@ -30,10 +30,11 @@
                     <div class="form-group">
                     <label for="SexoTextBox" class="col-md-3 control-label input-sm">Sexo: </label>
                      <div class="col-md-8">
-                        <asp:RadioButtonList ID="SexoRadioButtonList" runat="server" RepeatDirection="Horizontal" Width="400px">
+                        <%--<asp:RadioButtonList ID="SexoRadioButtonList" runat="server" RepeatDirection="Horizontal" Width="400px">
                             <asp:ListItem Selected="True">Masculino</asp:ListItem>
                             <asp:ListItem>Femenino</asp:ListItem>
-                        </asp:RadioButtonList><br/><br/>
+                        </asp:RadioButtonList><br/><br/>--%>
+                         <asp:TextBox ID="SexoTextBox" runat="server" CssClass="form-control " placeholder="Sexo"></asp:TextBox><br/><br/>
                     </div>
                     </div>
                 

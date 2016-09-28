@@ -19,7 +19,8 @@ namespace PersonWebApplication
             PersonaIdTextBox.Text = string.Empty;
             TelefonoTextBox.Text = string.Empty;
             TipoTelefonoTextBox.Text = string.Empty;
-            SexoRadioButtonList.SelectedIndex = 0;
+            //SexoRadioButtonList.SelectedIndex = 0;
+            SexoTextBox.Text = string.Empty;
             PersonasGridView.DataSource = string.Empty;
             PersonasGridView.DataBind();
         }
@@ -36,15 +37,22 @@ namespace PersonWebApplication
             {
                 Retorno = false;
             }
-
-            if (SexoRadioButtonList.SelectedIndex == 1)
+            if (SexoTextBox.Text.Length > 0)
             {
-                Persona.Sexo = true;
+                Persona.Sexo = SexoTextBox.Text;
             }
             else
             {
-                Persona.Sexo = false;
+                Retorno = false;
             }
+            //if (SexoRadioButtonList.SelectedIndex == 1)
+            //{
+            //    Persona.Sexo = true;
+            //}
+            //else
+            //{
+            //    Persona.Sexo = false;
+            //}
             if (PersonasGridView.Rows.Count > 0)
             {
                 foreach (GridViewRow item in PersonasGridView.Rows)

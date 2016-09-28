@@ -81,6 +81,7 @@
       <DependentUpon>PersonasDatabase.mdf</DependentUpon>
     </Content>
     <Content Include="DefaultWebForm.aspx" />
+    <Content Include="App_Data\Person.mdf" />
     <Content Include="PersonasTelefonosWebForm.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
