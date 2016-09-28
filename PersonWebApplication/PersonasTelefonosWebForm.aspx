@@ -78,7 +78,7 @@
                    <div class="form-group" style="display: inline-block">
                       <asp:Button Text="Nuevo" class ="btn btn-warning btn-sm" runat="server" ID="NuevoButton" OnClick="NuevoButton_Click"  />
                        <asp:Button Text="Guardar" class ="btn btn-info btn-sm" runat="server" ID="GButton" OnClick="GButton_Click"  />
-                      <asp:Button Text="Eliminar" class ="btn btn-danger btn-sm" runat="server" ID="EliminarButton"  />
+                      <asp:Button Text="Eliminar" class ="btn btn-danger btn-sm" runat="server" ID="EliminarButton" OnClick="EliminarButton_Click"  />
                    </div>
                    </div>
                 </div>

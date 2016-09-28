@@ -166,6 +166,40 @@ namespace PersonWebApplication
             {
                 Toastr.TClass.Toastr(this.Page, "no se guardo", "Error", "Error");
             }
-    }
+            if(PersonaIdTextBox.Text.Length > 0)
+            {
+                if(Persona.Editar())
+                {
+                    Limpiar();
+                }
+                else
+                {
+                    Toastr.TClass.Toastr(this.Page, "error", "Error", "Error");
+                }
+            }
+        }
+
+        protected void EliminarButton_Click(object sender, EventArgs e)
+        {
+           try
+            {
+                ObtenerDatos();
+                if(Persona.Buscar(Persona.PersonaId))
+                {
+                    if(Persona.Eliminar())
+                    {
+                        Limpiar();
+                        GButton.Text = "Guardar";
+                    }
+                    else
+                    {
+                        Toastr.TClass.Toastr(this.Page, "error", "Error", "Error");
+                    }
+                }
+            }   catch(Exception)
+            {
+                Toastr.TClass.Toastr(this.Page, "error", "Error", "Error");
+            }
+        }                   
     }
 }
